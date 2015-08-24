@@ -209,16 +209,11 @@ var _runPlugins = function ({
 // twice, whenever we clone an element add a special non-enumerable prop to
 // make sure we don't process this element again.
 var _cloneElement = function (renderedElement, newProps, newChildren) {
-  var clone = React.cloneElement(
-    renderedElement,
-    {
-      ...newProps,
-      _radiumDidResolveStyles: true
-    },
-    newChildren
-  );
+  if (typeof renderedElement.type === 'string') {
+    newProps = {...newProps, _radiumDidResolveStyles: true};
+  }
 
-  return clone;
+  return React.cloneElement(renderedElement, newProps, newChildren);
 };
 
 //
