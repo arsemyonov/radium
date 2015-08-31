@@ -162,6 +162,14 @@ var prefixInfo = {
   jsPrefix: ''
 };
 
+if (global && global.radiumVendorPrefix) {
+  cssVendorPrefix = global.radiumVendorPrefix;
+
+  prefixInfo = cssVendorPrefix && infoByCssPrefix[cssVendorPrefix]
+             ? infoByCssPrefix[cssVendorPrefix]
+             : prefixInfo;
+}
+
 
 if (ExecutionEnvironment.canUseDOM) {
   domStyle = (document: any).createElement('p').style;
